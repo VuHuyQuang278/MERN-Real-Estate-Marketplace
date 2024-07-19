@@ -46,14 +46,17 @@ export default function Profile() {
     uploadTask.on(
       "state_changed",
       (snapshot) => {
+        // Lấy % hoàn thành
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        // Làm tròn %
         setFilePerc(Math.round(progress));
       },
       (error) => {
         setFileUploadError(true);
       },
       () => {
+        // Lấy đường dãn hình ảnh upload
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
           setFormData({ ...formData, avatar: downloadURL })
         );
